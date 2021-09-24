@@ -16,7 +16,7 @@ const testFindById = async (id, done) => {
     if (!comercioDB) { done() 
     
     }
-    return console.log(" Eliminado de MongoDB");
+    return console.log("Ok");
 }
 
 describe('Test modelo Comercio', function(){
