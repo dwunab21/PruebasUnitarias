@@ -2,17 +2,17 @@ var mongoose = require('mongoose');
 const comercio = require('../../models/comercio.js');
 var Comercio = require('../../models/comercio.js')
 
-const Clistado = async () => {
+const Clistado =  () => {
     try {
-        const lista = await Comercio.listado()
+        const lista =  Comercio.listado()
         return lista.length;
     } catch (error) {
         return 0;
     }
 }
-const testFindById = async (id, done) => {
-    const comercioDB = await Comercio.findById(id);
-    
+const testFindById =  (id, done) => {
+    const comercioDB =  Comercio.findById(id);
+    expect(comercioDB).not.withContext('ID no encontrado').toBeNull();
     if (!comercioDB) { done() 
     
     }
@@ -31,14 +31,13 @@ describe('Test modelo Comercio', function(){
             done();
         });
     })
+ 
 
-    //************************************************************************************/
-/*  
-
+/*
     describe('GET',()=>{
         it('Busca por _id, nombre y direccion', (done) => {
                 /////////////////// Campo para busqueda ///////////////////////////////
-            Comercio.buscar('', '', (error, lista) => {
+            Comercio.buscar('_id', '', (error, lista) => {
                 console.log(lista);
                 expect(error).withContext('400 Bad Request').toBeNull();
                 expect(lista.length).withContext('404 Not Found')
@@ -48,12 +47,28 @@ describe('Test modelo Comercio', function(){
             })
         })
     })
+**/
+
 /*
-    /************************************************************************************/
-/*
+    describe('POST',()=>{
+        it('Registra un nuevo comercio', (done) => {
+            /////////////////// ////////////////////////Campos para registrar un nuevo comercio ////
+            const comercio = Comercio.Constructor('','', '')
+            comercio.save( (error, comercio) => {
+                const { _id } = comercio;
+                expect(error).withContext('error en la consulta').toBeNull();
+                expect(_id).not.withContext('no se generó ID').toBeNull();
+                done()
+            })
+        })
+
+    })
+**/
+
+ /*  
     describe('PUT',()=>{
         it('Editar campos de comercio como nombre direccion y telefono', (done) => {
-            /////////////////// Inserte el ID ///////////////////////////////
+            /////////////////// Inserte el ID del Comercio ///////////////////////////
             const id = '614a4c2bfa141c94792d003f';
             const comercioDB = testFindById(id, done)
                 /////////////////// Campo para editar ///////////////////////////////
@@ -67,19 +82,24 @@ describe('Test modelo Comercio', function(){
         })
     
     })
+**/
+    
+
 /*
-    /************************************************************************************/ 
     describe('DELETE',()=>{   
-        it('Eliminar registro de comercio', (done) => {
+        it('Eliminar registro de comercio por id', (done) => {
+            /////////////////// Inserte el ID del Comercio ///////////////////////////
             const id = '614c61261af5a9ae72d9dd650000';
              const comercioDB = testFindById(id, done);
                 Comercio.eliminar(id, (error,) => { 
                 expect(comercioDB).withContext('ID no encontrado').toBe();
-                expect(error).withContext('404 Not Found').toBeNull()
-                
+                expect(error).withContext('404 Not Found').toBeNull() 
                 done()
             })
         })
     })
+    
+**/
 
+    
 })
