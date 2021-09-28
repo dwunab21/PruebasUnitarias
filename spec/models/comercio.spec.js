@@ -12,11 +12,11 @@ const Clistado =  () => {
 }
 const testFindById =  (id, done) => {
     const comercioDB =  Comercio.findById(id);
-    expect(comercioDB).not.withContext('ID no encontrado').toBeNull();
+    expect(comercioDB).not.withContext('ID no encontrado').toBe();
     if (!comercioDB) { done() 
     
     }
-    return console.log("Ok");
+    return 0;
 }
 
 describe('Test modelo Comercio', function(){
@@ -32,47 +32,50 @@ describe('Test modelo Comercio', function(){
         });
     })
  
-
 /*
+
     describe('GET',()=>{
         it('Busca por _id, nombre y direccion', (done) => {
                 /////////////////// Campo para busqueda ///////////////////////////////
-            Comercio.buscar('_id', '', (error, lista) => {
+            Comercio.buscar('_id', '6152ade6d11dbbdf26eb6b0d', (error, lista) => {
                 console.log(lista);
                 expect(error).withContext('400 Bad Request').toBeNull();
                 expect(lista.length).withContext('404 Not Found')
                 .toBeGreaterThanOrEqual(1)
             done()
-        
             })
         })
     })
+
 **/
 
 /*
-    describe('POST',()=>{
-        it('Registra un nuevo comercio', (done) => {
-            /////////////////// ////////////////////////Campos para registrar un nuevo comercio ////
-            const comercio = Comercio.Constructor('','', '')
-            comercio.save( (error, comercio) => {
-                const { _id } = comercio;
-                expect(error).withContext('error en la consulta').toBeNull();
-                expect(_id).not.withContext('no se generó ID').toBeNull();
-                done()
-            })
-        })
 
+describe('POST',()=>{
+    it('Registra un nuevo comercio', (done) => {
+        //////////////////////////////Campos para registrar un nuevo comercio ////
+        const comercio = Comercio.Constructor('Pan Lilian','Chalatenango', '7655-9098')
+        comercio.save( (error, comercio) => {
+            const { _id } = comercio;
+            console.log('Registrado');
+            expect(error).withContext('400 Bad Request').toBeNull();
+            expect(_id).not.withContext('404 Not Found')
+            .toBeGreaterThanOrEqual(1)
+            done()
+        })
     })
+})
+
 **/
 
- /*  
+/*
     describe('PUT',()=>{
         it('Editar campos de comercio como nombre direccion y telefono', (done) => {
             /////////////////// Inserte el ID del Comercio ///////////////////////////
-            const id = '614a4c2bfa141c94792d003f';
+            const id = '6152ade6d11dbbdf26eb6b0d';
             const comercioDB = testFindById(id, done)
                 /////////////////// Campo para editar ///////////////////////////////
-                Comercio.editar(id, { nombre: 'Pan Lilian', direccion: 'Chalatenango', telefono:'78986543'}, (error, lista) => {
+                Comercio.editar(id, { nombre: 'Pan Lilian', direccion: 'Nueva Concepcion', telefono:'7655-9098'}, (error, lista) => {
                 console.log(lista);
                 expect(error).withContext('400 Bad Request').toBeNull();
                 expect(comercioDB).not.withContext('404 Not Found')
@@ -82,24 +85,25 @@ describe('Test modelo Comercio', function(){
         })
     
     })
-**/
-    
 
-/*
+**/  
+
+
     describe('DELETE',()=>{   
         it('Eliminar registro de comercio por id', (done) => {
             /////////////////// Inserte el ID del Comercio ///////////////////////////
-            const id = '614c61261af5a9ae72d9dd650000';
+            const id = '6152ade6d11dbbdf26eb6b0d';
              const comercioDB = testFindById(id, done);
-                Comercio.eliminar(id, (error,) => { 
-                expect(comercioDB).withContext('ID no encontrado').toBe();
-                expect(error).withContext('404 Not Found').toBeNull() 
+                Comercio.eliminar(id, (error) => {
+                    console.log('Eliminado');
+                expect(error).withContext('400 Bad Request').toBeNull();
+                expect(comercioDB).not.withContext('404 Not Found')
+                .toBeGreaterThanOrEqual(1)
                 done()
             })
         })
     })
     
-**/
 
     
 })

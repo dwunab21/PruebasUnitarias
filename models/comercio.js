@@ -32,7 +32,7 @@ ComercioSchema.statics.eliminar = function (id, cb) {
 
 }
 
-ComercioSchema.statics.guardar = function (nombre,direccion,telefono, comercio, cb) {
+ComercioSchema.statics.registrar = function (nombre,direccion,telefono, comercio, cb) {
     return this.findByIdAndSave(nombre,direccion,telefono, { "$set": comercio }, { returnOriginal: false }, cb);
 }
 module.exports= mongoose.model('Comercio',ComercioSchema)
